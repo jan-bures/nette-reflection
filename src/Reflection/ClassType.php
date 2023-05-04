@@ -128,11 +128,11 @@ class ClassType extends \ReflectionClass
 
 
 	/**
-	 * @return static|null
+	 * @return static|false
 	 */
-	public function getParentClass(): ?static
+	public function getParentClass(): static|false
 	{
-		return ($ref = parent::getParentClass()) ? new static($ref->getName()) : null;
+		return ($ref = parent::getParentClass()) ? new static($ref->getName()) : false;
 	}
 
 

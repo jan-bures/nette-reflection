@@ -39,7 +39,7 @@ class Parameter extends \ReflectionParameter
 
 
 	/**
-	 * @return ClassType
+	 * @return ClassType|null
 	 */
 	public function getClass(): ?ClassType
 	{
@@ -64,7 +64,7 @@ class Parameter extends \ReflectionParameter
 
 
 	/**
-	 * @return ?ClassType
+	 * @return ClassType|null
 	 */
 	public function getDeclaringClass(): ?ClassType
 	{
