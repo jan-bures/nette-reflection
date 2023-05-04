@@ -17,7 +17,7 @@ class Extension extends \ReflectionExtension
 {
 	use Nette\SmartObject;
 
-	public function __toString()
+	public function __toString(): string
 	{
 		return $this->getName();
 	}
@@ -26,7 +26,7 @@ class Extension extends \ReflectionExtension
 	/********************* Reflection layer ****************d*g**/
 
 
-	public function getClasses()
+	public function getClasses(): array
 	{
 		$res = [];
 		foreach (parent::getClassNames() as $val) {
@@ -36,7 +36,7 @@ class Extension extends \ReflectionExtension
 	}
 
 
-	public function getFunctions()
+	public function getFunctions(): array
 	{
 		foreach ($res = parent::getFunctions() as $key => $val) {
 			$res[$key] = new GlobalFunction($key);

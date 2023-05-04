@@ -40,18 +40,9 @@ class GlobalFunction extends \ReflectionFunction
 	private $value;
 
 
-	public function __construct($name)
+	public function __construct(\Closure|string $name)
 	{
 		parent::__construct($this->value = $name);
-	}
-
-
-	/**
-	 * @deprecated
-	 */
-	public function toCallback()
-	{
-		return new Nette\Callback($this->value);
 	}
 
 
@@ -65,9 +56,9 @@ class GlobalFunction extends \ReflectionFunction
 
 
 	/**
-	 * @return Extension
+	 * @return Extension|null
 	 */
-	public function getExtension()
+	public function getExtension(): ?Extension
 	{
 		return ($name = $this->getExtensionName()) ? new Extension($name) : null;
 	}
@@ -76,7 +67,7 @@ class GlobalFunction extends \ReflectionFunction
 	/**
 	 * @return Parameter[]
 	 */
-	public function getParameters()
+	public function getParameters(): array
 	{
 		foreach ($res = parent::getParameters() as $key => $val) {
 			$res[$key] = new Parameter($this->value, $val->getName());

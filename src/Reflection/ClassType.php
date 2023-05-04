@@ -7,6 +7,7 @@
 
 namespace Nette\Reflection;
 
+use mysql_xdevapi\Exception;
 use Nette;
 
 
@@ -55,7 +56,7 @@ class ClassType extends \ReflectionClass
 	}
 
 
-	public function __toString()
+	public function __toString(): string
 	{
 		return $this->getName();
 	}
@@ -77,7 +78,7 @@ class ClassType extends \ReflectionClass
 	/**
 	 * @return Method|null
 	 */
-	public function getConstructor()
+	public function getConstructor(): ?Method
 	{
 		return ($ref = parent::getConstructor()) ? Method::from($this->getName(), $ref->getName()) : null;
 	}
@@ -86,7 +87,7 @@ class ClassType extends \ReflectionClass
 	/**
 	 * @return Extension|null
 	 */
-	public function getExtension()
+	public function getExtension(): ?Extension
 	{
 		return ($name = $this->getExtensionName()) ? new Extension($name) : null;
 	}
@@ -95,7 +96,7 @@ class ClassType extends \ReflectionClass
 	/**
 	 * @return static[]
 	 */
-	public function getInterfaces()
+	public function getInterfaces(): array
 	{
 		$res = [];
 		foreach (parent::getInterfaceNames() as $val) {
@@ -108,7 +109,7 @@ class ClassType extends \ReflectionClass
 	/**
 	 * @return Method
 	 */
-	public function getMethod($name)
+	public function getMethod(string $name): Method
 	{
 		return new Method($this->getName(), $name);
 	}
@@ -117,7 +118,7 @@ class ClassType extends \ReflectionClass
 	/**
 	 * @return Method[]
 	 */
-	public function getMethods($filter = -1)
+	public function getMethods(?int $filter = -1): array
 	{
 		foreach ($res = parent::getMethods($filter) as $key => $val) {
 			$res[$key] = new Method($this->getName(), $val->getName());
@@ -129,7 +130,7 @@ class ClassType extends \ReflectionClass
 	/**
 	 * @return static|null
 	 */
-	public function getParentClass()
+	public function getParentClass(): ?static
 	{
 		return ($ref = parent::getParentClass()) ? new static($ref->getName()) : null;
 	}
@@ -138,7 +139,7 @@ class ClassType extends \ReflectionClass
 	/**
 	 * @return Property[]
 	 */
-	public function getProperties($filter = -1)
+	public function getProperties(?int $filter = -1): array
 	{
 		foreach ($res = parent::getProperties($filter) as $key => $val) {
 			$res[$key] = new Property($this->getName(), $val->getName());
@@ -150,7 +151,7 @@ class ClassType extends \ReflectionClass
 	/**
 	 * @return Property
 	 */
-	public function getProperty($name)
+	public function getProperty(string $name): Property
 	{
 		return new Property($this->getName(), $name);
 	}

@@ -60,15 +60,6 @@ class Method extends \ReflectionMethod
 	}
 
 
-	/**
-	 * @deprecated
-	 */
-	public function toCallback()
-	{
-		return new Nette\Callback(parent::getDeclaringClass()->getName(), $this->getName());
-	}
-
-
 	public function __toString()
 	{
 		return parent::getDeclaringClass()->getName() . '::' . $this->getName() . '()';
@@ -81,7 +72,7 @@ class Method extends \ReflectionMethod
 	/**
 	 * @return ClassType
 	 */
-	public function getDeclaringClass()
+	public function getDeclaringClass(): ClassType
 	{
 		return new ClassType(parent::getDeclaringClass()->getName());
 	}
@@ -90,7 +81,7 @@ class Method extends \ReflectionMethod
 	/**
 	 * @return static
 	 */
-	public function getPrototype()
+	public function getPrototype(): static
 	{
 		$prototype = parent::getPrototype();
 		return new static($prototype->getDeclaringClass()->getName(), $prototype->getName());
@@ -98,9 +89,9 @@ class Method extends \ReflectionMethod
 
 
 	/**
-	 * @return Extension
+	 * @return Extension|null
 	 */
-	public function getExtension()
+	public function getExtension(): ?Extension
 	{
 		return ($name = $this->getExtensionName()) ? new Extension($name) : null;
 	}
@@ -109,7 +100,7 @@ class Method extends \ReflectionMethod
 	/**
 	 * @return Parameter[]
 	 */
-	public function getParameters()
+	public function getParameters(): array
 	{
 		$me = [parent::getDeclaringClass()->getName(), $this->getName()];
 		foreach ($res = parent::getParameters() as $key => $val) {

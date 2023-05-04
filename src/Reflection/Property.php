@@ -42,8 +42,8 @@ class Property extends \ReflectionProperty
 	/**
 	 * @return ClassType
 	 */
-	public function getDeclaringClass()
-	{
+	public function getDeclaringClass(): ClassType
+    {
 		return new ClassType(parent::getDeclaringClass()->getName());
 	}
 
